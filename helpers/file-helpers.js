@@ -13,4 +13,4 @@ const imgurFileHandler = (file) => {
   });
 };
 
-module.exports = imgurFileHandler;
+module.exports = { imgurFileHandler };

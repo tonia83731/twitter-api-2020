@@ -7,7 +7,7 @@ const authController = {
   signUp: async (req, res, next) => {
     try {
       const { account, name, email, password, checkPassword } = req.body;
-      console.log(account, name, email, password, checkPassword);
+      // console.log(account, name, email, password, checkPassword);
       if (!account || !name || !email || !password || !checkPassword)
         return res.status(401).json({
           status: "error",
@@ -16,7 +16,7 @@ const authController = {
       if (name.length > 50)
         return res.status(401).json({
           status: "error",
-          message: "name 不可超過50字",
+          message: "字數超出上限！name 不可超過50字!",
         });
       if (password !== checkPassword)
         return res.status(401).json({
@@ -72,7 +72,7 @@ const authController = {
       const token = jwt.sign(currUser, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
-      console.log(currUser);
+      // console.log(currUser);
 
       if (currUser.role !== "user")
         return res.status(404).json({
@@ -94,7 +94,7 @@ const authController = {
   admin_signIn: async (req, res, next) => {
     try {
       const currUser = req.user.toJSON();
-      delete userData.password;
+      delete currUser.password;
       const token = jwt.sign(currUser, process.env.JWT_SECRET, {
         expiresIn: "1d",
       });
