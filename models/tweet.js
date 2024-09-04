@@ -21,12 +21,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: DataTypes.INTEGER,
       description: DataTypes.TEXT,
+      editCount: DataTypes.INTEGER,
+      deletedAt: DataTypes.DATE,
     },
     {
       sequelize,
       modelName: "Tweet",
       tableName: "Tweets",
       underscored: true,
+      paranoid: true,
+      timestamps: true,
     }
   );
   return Tweet;
